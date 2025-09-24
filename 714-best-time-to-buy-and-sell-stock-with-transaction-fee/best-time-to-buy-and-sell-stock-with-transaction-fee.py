@@ -7,14 +7,14 @@ class Solution:
                 return 0
             if (i, last_transaction) not in memo:
                 if last_transaction == 0:
-                    include = max_p(i + 1, 1) - prices[i] 
+                    include = max_p(i + 1, 1) + prices[i] -fee
                 else:
-                    include = max_p(i + 1, 0) + prices[i] - fee
+                    include = max_p(i + 1, 0) - prices[i] 
                 exclude = max_p(i + 1, last_transaction)
                 memo[(i,last_transaction)] = max(include, exclude)
             return memo[(i,last_transaction)]
 
-        return max_p(0, 0)
+        return max_p(0, 1)
                 
                
 
