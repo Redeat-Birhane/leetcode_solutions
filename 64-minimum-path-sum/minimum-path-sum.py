@@ -1,15 +1,17 @@
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
-        m, n = len(grid), len(grid[0])
-        for i in range(m):
-            for j in range(n):
-                if i > 0 and j > 0:
-                   grid[i][j] += min(grid[i - 1][j], grid[i][j - 1])
-                elif i > 0:
-                    grid[i][j] += grid[i - 1][j]
-                elif j > 0:
-                    grid[i][j] += grid[i][j - 1]
+        n, m = len(grid), len(grid[0])
+        memo = {}
+        def min_path(i, j):
+            if i == n - 1 and j == m - 1:
+                return grid[i][j]
+            if i >= n or j >= m:
+                return float("inf")
+            if (i, j) not in memo:
+                memo[(i,j)] = grid[i][j] + min(min_path(i + 1, j), min_path(i, j + 1))
 
-        return grid[m - 1][n - 1]
+            return memo[(i,j)]
 
-        
+        return min_path(0, 0)
+
+                
