@@ -1,0 +1,19 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        memo, n = {}, len(coins)
+        def min_coins(i, rem_amount):
+            if i >= n:
+                return float("inf") 
+            if rem_amount == 0:
+                return 0
+            if (i, rem_amount) not in memo:
+                include = float("inf")
+                if rem_amount >= coins[i]:
+                    include = 1 + min_coins(i , rem_amount - coins[i])
+                exclude = min_coins(i + 1, rem_amount)
+                memo[(i, rem_amount)] = min(include, exclude)
+            return memo[(i, rem_amount)]
+        ans = min_coins(0, amount)
+        return ans if ans != float("inf")  else -1
+
+        
