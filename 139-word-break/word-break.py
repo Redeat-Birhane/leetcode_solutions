@@ -1,14 +1,19 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        word_set = set(wordDict)  
-        n = len(s)
-        dp = [False] * (n + 1)
-        dp[0] = True  
+        memo = {}
+        def word(idx):
+            if idx >= len(s):
+                return True
 
-        for i in range(1, n + 1):
-            for j in range(i):
-                if dp[j] and s[j:i] in word_set:
-                    dp[i] = True
-                    break  
+            if idx not in memo:
+                for i in range(idx, len(s)):
+                    if s[idx:i + 1] in wordDict:
+                        if word(i + 1):
+                            memo[idx] = True
+                            return True
+                memo[idx] = False
+                return False
+            
+        return word(0)
 
-        return dp[n]
+        
