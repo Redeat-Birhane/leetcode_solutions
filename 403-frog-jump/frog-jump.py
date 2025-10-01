@@ -18,4 +18,4 @@ class Solution:
                 return False
                 
 
-        return frog_jump(0, 1) if 1 in stones else False
+        return frog_jump(0, 0) 
