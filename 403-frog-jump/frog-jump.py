@@ -1,7 +1,5 @@
 class Solution:
     def canCross(self, stones: List[int]) -> bool:
-        if stones ==[0,1,2,5,6,9,10,12,13,14,17,19,20,21,26,27,28,29,30]:
-            return False
         memo = {}
         last_pos, stones = stones[-1], set(stones)
         def frog_jump(pos, last_jump):
@@ -18,4 +16,4 @@ class Solution:
                 return False
                 
 
-        return frog_jump(0, 0) 
+        return frog_jump(0, 0) # the current position and the jump i used to reach to this position
