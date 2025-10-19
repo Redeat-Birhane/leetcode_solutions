@@ -24,16 +24,19 @@ class WordDictionary:
                 return node.is_end
 
             char = word[i]
-            if char == '.':
-                
+            if char == ".":
                 for child in node.children:
                     if child and dfs(child, i + 1):
                         return True
+
                 return False
+
             else:
-                idx = ord(char) - ord('a')
-                if node.children[idx] is None:
+                idx = ord(char) - ord("a")
+                if node.children[idx] == None:
                     return False
+
                 return dfs(node.children[idx], i + 1)
 
         return dfs(self.root, 0)
+        
