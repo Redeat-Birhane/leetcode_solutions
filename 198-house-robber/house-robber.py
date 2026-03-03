@@ -1,16 +1,15 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         memo = {}
-        def dp(num):
-            if num in memo:
-                return memo[num]
-            if num == len(nums) - 1:
-                return nums[num]
-            if num == len(nums) - 2:
-                return max(nums[num], nums[num + 1])
-            memo[num] = max(nums[num] + dp(num + 2), dp(num + 1))
-            return memo[num]
-        return dp(0)
-            
+        def house_robber(index):
+            if index >= len(nums):
+                return 0
+            if index not in memo:
+                rob = nums[index] + house_robber(index + 2)
+                not_rob = house_robber(index + 1)
+                memo[index] = max(rob, not_rob)
 
-        
+            return memo[index]
+
+        return house_robber(0)
+            
